@@ -1,7 +1,9 @@
 import streamlit as st
 
-if st.session_state.get("logged_in") == None:
-    st.session_state["logged_in"] = False
+
+def init_session_state():
+    if "logged_in" not in st.session_state:
+        st.session_state.logged_in = False
 
 
 def login():
@@ -13,6 +15,8 @@ def logout():
 
 
 st.set_page_config(page_title="Report")
+
+init_session_state()
 
 st.markdown("# Report")
 st.sidebar.header("Report")
@@ -26,25 +30,15 @@ else:
 
 st.sidebar.write("This site is copyright Fake Company LLC Inc., 2024")
 
-st.write(
-    """
-        Here is a page with a report on it.
-    """
-)
+st.write("Here is a page with a report on it.")
 
 st.bar_chart({"data": [1, 5, 2, 6, 2, 1]})
 
-st.write(
-    """
-    Look at those numbers. Amazing.
-"""
-)
+st.write("Look at those numbers. Amazing.")
 
 with st.expander("Company Info"):
     st.write(
-        """
-        Fake Company LLC Inc. is located at 1600 Amphitheatre Parkway Mountain View, CA 94043
-    """
+        "Fake Company LLC Inc. is located at 1600 Amphitheatre Parkway Mountain View, CA 94043"
     )
 
 with st.expander("Links"):
@@ -55,5 +49,5 @@ with st.expander("Links"):
         [Gemini](https://gemini.google.com)
 
         [Streamlit Docs](https://docs.streamlit.io/)
-    """
+        """
     )

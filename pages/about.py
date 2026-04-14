@@ -1,7 +1,9 @@
 import streamlit as st
 
-if st.session_state.get("logged_in") == None:
-    st.session_state["logged_in"] = False
+
+def init_session_state():
+    if "logged_in" not in st.session_state:
+        st.session_state.logged_in = False
 
 
 def login():
@@ -13,6 +15,8 @@ def logout():
 
 
 st.set_page_config(page_title="About")
+
+init_session_state()
 
 st.markdown("# About")
 st.sidebar.header("About")
@@ -42,9 +46,7 @@ st.image("./assets/fake_company.png")
 
 with st.expander("Company Info"):
     st.write(
-        """
-        Fake Company LLC Inc. is located at 1600 Amphitheatre Parkway Mountain View, CA 94043
-    """
+        "Fake Company LLC Inc. is located at 1600 Amphitheatre Parkway Mountain View, CA 94043"
     )
 
 with st.expander("Links"):
@@ -55,5 +57,5 @@ with st.expander("Links"):
         [Gemini](https://gemini.google.com)
 
         [Streamlit Docs](https://docs.streamlit.io/)
-    """
+        """
     )
